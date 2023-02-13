@@ -1,0 +1,99 @@
+<div class="container w-75 bg-light shadow-lg card" >
+  <div class="card-header text-center">
+    <h2>Reactive form Example</h2>
+  </div>
+  <div class="card-body">
+    <form class="form" autocomplete="off" [formGroup]="employeeForm" (submit)="onRegister()">
+      <label class="form-label" for="username">First Name </label>
+      <input class="form-control" formControlName="firstName" type="text" id="firstname" required>
+      <p *ngIf="employeeForm?.touched && isSubmit && employeeForm.get('firstName')?.errors" class="text-danger">* Please enter your first name</p>
+
+      <label class="form-label" for="username">Last Name </label>
+      <input class="form-control" formControlName="lastName" type="text" id="lastname" required>
+
+      <label class="form-label" for="username">Email </label>
+      <input class="form-control" formControlName="email" type="email" id="email" required>
+
+      <label class="form-label" for="username">Phone </label>
+      <input class="form-control" formControlName="phone" type="tel" id="phone" required>
+
+      <label class="form-label" for="username">Company</label>
+      <input class="form-control" formControlName="company" type="text" id="company">
+      <hr>
+      <div class="">
+        <p>Gender</p>
+          <div class="">
+            <input class="form-check" type="radio" id="male" name="gender" value="male" formControlName="gender">
+            <label for="male">Male</label>
+          </div>
+          <div class="">
+            <input class="form-check" type="radio" id="gender" name="gender" value="female" formControlName="gender">
+            <label for="female">Female</label>
+          </div>
+      </div>
+      <hr>
+
+      <label for="DOB" class="form-label">DOB </label>
+      <input type="date" id="DOB" formControlName="dob">
+      <hr>
+      <label for="pass">Password</label>
+      <input class="form-control" type="password" formControlName="password" id="pass">
+      <label for="confirmpass">Confirm Password</label>
+      <input class="form-control" type="password" formControlName="confirmPassword" id="confirmpass">
+      <hr>
+      <div class="row text-center d-flex justify-content-center align-content-between">
+          <button type="submit" class="btn btn-success w-25"> Register </button>
+          <button class="btn btn-danger w-25">Cancel</button>
+      </div>
+      <hr>
+    </form>
+  </div>
+</div>
+
+
+<div class="container mt-5 shadow-lg" *ngIf="employees.length>0">
+  <table class="table">
+    <thead>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Company</th>
+      <th>Gender</th>
+      <th>DOB</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>
+          {{employee.firstName}}
+        </td>
+        <td>
+          {{employee.lastName}}
+        </td>
+        <td>
+          {{employee.email}}
+        </td>
+        <td>
+          {{employee.phone}}
+        </td>
+        <td>
+          {{employee.company}}
+        </td>
+        <td>
+          {{employee.gender}}
+        </td>
+        <td>
+          {{employee.dob}}
+        </td>
+        <td>
+          <button class="btn btn-outline-info" (click)="onEdit(employee)"> Edit</button>
+        </td>
+        <td>
+          <button class="btn btn-outline-danger" (click)="onDelete(employee)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
